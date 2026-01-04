@@ -136,3 +136,75 @@ DROP TABLE customer;
 -- -------------------------------------------------
 
 TRUNCATE TABLE customer;
+
+
+-- -------------------------------------------------
+-- 11. GROUP BY
+-- Used to group rows that have the same values
+-- Often used with aggregate functions
+-- -------------------------------------------------
+
+-- Count number of students in each department
+SELECT dept, COUNT(*) AS student_count
+FROM a
+GROUP BY dept;
+
+-- Average IQ per department
+SELECT dept, AVG(iq) AS avg_iq
+FROM a
+GROUP BY dept;
+
+
+-- -------------------------------------------------
+-- 12. HAVING
+-- Used to filter groups after GROUP BY
+-- HAVING works on aggregated data
+-- -------------------------------------------------
+
+-- Departments having more than 5 students
+SELECT dept, COUNT(*) AS student_count
+FROM a
+GROUP BY dept
+HAVING COUNT(*) > 5;
+
+-- Departments with average IQ greater than 120
+SELECT dept, AVG(iq) AS avg_iq
+FROM a
+GROUP BY dept
+HAVING AVG(iq) > 120;
+
+
+-- -------------------------------------------------
+-- 13. LIMIT
+-- Used to restrict the number of rows returned
+-- -------------------------------------------------
+
+-- Fetch only first 5 records
+SELECT *
+FROM a
+LIMIT 5;
+
+-- Fetch top 3 highest IQ students
+SELECT *
+FROM a
+ORDER BY iq DESC
+LIMIT 3;
+
+
+-- -------------------------------------------------
+-- 14. OFFSET
+-- Used to skip a given number of rows
+-- Mostly used with LIMIT
+-- -------------------------------------------------
+
+-- Skip first 5 records and fetch next 5
+SELECT *
+FROM a
+LIMIT 5 OFFSET 5;
+
+-- Pagination example (page 2, page size = 3)
+SELECT *
+FROM a
+ORDER BY Cust_ID
+LIMIT 3 OFFSET 3;
+
