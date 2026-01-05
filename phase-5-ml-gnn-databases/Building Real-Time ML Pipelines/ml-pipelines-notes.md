@@ -318,8 +318,361 @@ Simple and consistent APIs for feature retrieval.
 - Faster deployment cycles  
 - Better governance and observability  
 
+
+
 **Summary**  
 An integrated Feature Store simplifies feature engineering by unifying
 offline and online feature development, providing centralized catalogs,
 versioning, and easy access for both training and real-time serving,
 resulting in faster and more reliable ML systems.
+
+
+# 5. Faster Development to Production with MLOps & Serverless Automation
+
+This architecture illustrates how modern MLOps platforms accelerate the
+journey from development to production by combining **serverless execution,
+automation, and reusable ML components**.
+
+The main goal is to reduce manual effort while enabling scalable,
+production-grade ML systems.
+
+---
+
+## Development in Native Environment
+
+Model development starts in familiar tools such as:
+- Notebooks
+- IDEs
+- Local development environments
+
+Developers focus only on writing ML code and feature logic, without worrying
+about infrastructure or deployment details.
+
+---
+
+## Automated Code to Scalable Microservices
+
+Development code is automatically converted into scalable microservices.
+
+- No manual containerization
+- No infrastructure configuration
+- Code is packaged and deployed automatically
+- Services are production-ready by default
+
+This removes the traditional gap between development and deployment.
+
+---
+
+## Test and Run on the Cluster
+
+Code can be tested directly on the cluster environment.
+
+- Same environment for development and production
+- Early detection of performance or dependency issues
+- Eliminates “works on my machine” problems
+
+---
+
+## Feature Store & Function Marketplace
+
+Reusable components act as building blocks for pipelines.
+
+### Feature Store
+- Centralized storage for ML features
+- Shared across training and serving
+- Ensures feature consistency
+
+### Function Marketplace
+- Reusable ML and data processing functions
+- Standardized and versioned components
+- Reduces duplicate implementations
+
+These components enable faster and more reliable pipeline creation.
+
+---
+
+## Building Development and Production Pipelines
+
+Pipelines are composed using reusable data and functions.
+
+- Same pipeline logic for development and production
+- Automated pipeline deployment
+- Minimal configuration required
+- Supports both batch and real-time workflows
+
+This significantly shortens the path from experimentation to production.
+
+---
+
+## Automated Tracking and Monitoring
+
+Once deployed, the system automatically tracks and monitors:
+
+- Experiments
+- Models
+- Data
+- Services
+
+This provides visibility across the entire ML lifecycle and helps detect
+issues early in production.
+
+---
+
+## Key Benefits
+
+- Faster development-to-production cycles
+- Minimal operational overhead
+- High scalability with serverless execution
+- Reusable and standardized ML components
+- Improved reliability and observability
+
+---
+
+**Summary**
+
+By combining MLOps practices with serverless automation, this architecture
+enables rapid deployment of ML systems at scale, allowing teams to focus on
+model logic and features instead of infrastructure and operations.
+
+
+# 6. Glue-less Model Monitoring and Governance
+
+This architecture shows how modern MLOps platforms enable **real-time model
+monitoring and governance without manual glue code**. Monitoring, drift
+analysis, and governance are tightly integrated into the serving pipeline.
+
+The goal is to provide deep visibility into model behavior while minimizing
+operational complexity.
+
+---
+
+## Serving Pipeline
+
+The serving pipeline handles real-time prediction requests.
+
+**Flow**
+Requests → Model Serving → Predictions
+
+- Models serve predictions in real time
+- Validation rules are applied to incoming features
+- Both requests and predictions are continuously observed
+
+---
+
+## Real-Time Monitoring and Drift Analysis
+
+Monitoring runs alongside the serving pipeline.
+
+- Tracks feature distributions and prediction behavior
+- Computes feature statistics and labels
+- Detects data drift and concept drift in real time
+- Generates alerts when anomalies or degradation are detected
+
+This allows issues to be identified immediately instead of after failures.
+
+---
+
+## Event-Driven Applications
+
+Monitoring signals can trigger automated actions.
+
+- Alerts sent to notification systems
+- Integration with incident management or messaging tools
+- Event-driven workflows based on model behavior
+
+This enables automated responses instead of manual intervention.
+
+---
+
+## Online + Offline Feature Store
+
+A unified Feature Store supports monitoring and governance.
+
+- Stores real-time and historical features
+- Holds training data and labeled data
+- Enables comparison between training and serving distributions
+- Provides feature logs and statistics for analysis
+
+This ensures full visibility across the ML lifecycle.
+
+---
+
+## Dashboards and Observability
+
+Monitoring outputs are visualized using dashboards.
+
+- Model accuracy tracking
+- Drift and data quality metrics
+- Feature-level visibility
+- Historical and real-time analysis
+
+Dashboards help teams quickly understand model health and trends.
+
+---
+
+## Governance and Data Quality Policies
+
+Governance rules are applied directly within the pipeline.
+
+- Feature validation rules
+- Data quality checks
+- Policy enforcement without custom glue code
+- Rapid deployment of governance updates
+
+This reduces risk and improves compliance in production systems.
+
+---
+
+## Key Benefits
+
+- Real-time monitoring out of the box
+- Early detection of model and data issues
+- No manual integration between systems
+- Unified monitoring across online and offline data
+- Faster response to production problems
+
+---
+
+**Summary**
+
+Glue-less model monitoring and governance integrates real-time observation,
+drift analysis, and policy enforcement directly into the serving pipeline,
+providing deep visibility and control over production ML systems with minimal
+operational overhead.
+
+
+
+# 7. ML Pipeline Example: Predicting Financial Fraud
+
+This example illustrates a **production-grade ML pipeline** for predicting
+financial fraud using real-time data, feature stores, and automated MLOps
+workflows.
+
+The architecture demonstrates how offline and real-time data are unified
+to support training, serving, monitoring, and explainability.
+
+---
+
+## Data Sources
+
+The system consumes multiple types of data:
+
+### Static Data
+- User records
+- Historical account information
+- Slowly changing attributes
+
+### Streaming Data
+- Account activities
+- Real-time transactions
+- Event streams from message brokers
+
+All data sources are treated as inputs to a unified feature pipeline.
+
+---
+
+## Automated Feature Transformation (Serverless)
+
+Feature engineering is handled using serverless, automated jobs.
+
+- Scheduled batch transformations for static data
+- Real-time feature updates from streaming events
+- Same transformation logic reused across pipelines
+- No manual infrastructure management
+
+Both batch and streaming features are continuously written to the Feature Store.
+
+---
+
+## Online + Offline Feature Store
+
+A centralized Feature Store acts as the core of the pipeline.
+
+- Stores historical (offline) features for training
+- Stores real-time (online) features for inference
+- Ensures feature consistency between training and serving
+- Enables feature reuse across multiple models
+
+This eliminates training–serving skew.
+
+---
+
+## Interactive Exploration
+
+Data scientists interactively explore features and data.
+
+- Feature validation and sanity checks
+- Exploratory analysis using offline features
+- Faster iteration during model development
+
+Exploration is directly connected to the Feature Store.
+
+---
+
+## Automated Model Creation and Deployment Pipeline
+
+Model creation and deployment are fully automated.
+
+**Flow**
+Build Training Set → AutoML → Deploy Real-Time Pipeline
+
+- Training datasets are built directly from offline features
+- AutoML simplifies model selection and tuning
+- Models are deployed as real-time APIs
+- CI/CD-style automation reduces manual steps
+
+---
+
+## Real-Time Model Serving
+
+Deployed models serve predictions through APIs.
+
+- Low-latency inference
+- Real-time feature lookup from Feature Store
+- Scalable and production-ready serving layer
+
+This allows fraud detection decisions to be made instantly.
+
+---
+
+## Model Monitoring
+
+Models are continuously monitored after deployment.
+
+- Prediction quality tracking
+- Feature and data drift detection
+- Performance monitoring in real time
+- Feedback loop to improve models
+
+Monitoring is tightly integrated with serving.
+
+---
+
+## Explainability
+
+Explainability tools provide insight into model decisions.
+
+- Feature contribution analysis
+- Model behavior interpretation
+- Helps build trust and meet compliance requirements
+
+Explainability operates on top of the same feature data.
+
+---
+
+## Key Takeaways
+
+- Unified offline and real-time data processing
+- Feature Store as the central system component
+- Automated feature engineering and deployment
+- Real-time fraud detection with monitoring and explainability
+- Production-ready ML pipeline design
+
+---
+
+**Summary**
+
+This fraud prediction pipeline demonstrates how modern MLOps systems combine
+streaming data, feature stores, automated training, and real-time serving to
+build scalable, reliable, and explainable ML systems for high-risk use cases.
+
