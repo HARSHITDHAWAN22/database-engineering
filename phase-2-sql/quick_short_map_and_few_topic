@@ -1,0 +1,98 @@
+# SQL Query Writing Order & Important Syntax
+
+## SQL Query Writing Order
+
+1. SELECT
+   - Aggregate functions
+   - Window functions → OVER()
+     - PARTITION BY
+     - ORDER BY
+
+2. FROM
+   - Table / Subquery / CTE
+
+3. JOIN
+   - ON → Join condition
+
+4. WHERE
+   - Filter individual rows
+   - NULL check → IS NULL / IS NOT NULL
+
+5. GROUP BY
+   - Create groups
+
+6. HAVING
+   - Filter groups
+
+7. ORDER BY
+   - Sort result
+
+8. LIMIT
+   - Number of rows
+
+9. OFFSET
+   - Skip rows
+
+
+## Important Combinations
+
+JOIN
+→ ON
+
+WINDOW FUNCTION
+→ OVER()
+   → PARTITION BY
+   → ORDER BY
+
+RECURSIVE CTE
+→ WITH RECURSIVE
+→ Anchor Query
+→ UNION ALL
+→ Recursive Query
+→ Final SELECT
+
+NULL
+→ IS NULL
+
+NOT NULL
+→ IS NOT NULL
+
+GROUPING
+→ GROUP BY
+
+GROUP FILTER
+→ HAVING
+
+
+## Window Function Filtering
+
+Window Function
+→ Create Alias
+→ Subquery / CTE
+→ WHERE on Alias
+
+Example:
+
+SELECT *
+FROM (
+    SELECT e.*,
+           ROW_NUMBER() OVER (
+               PARTITION BY dept_name
+               ORDER BY salary DESC
+           ) AS rn
+    FROM employee e
+) x
+WHERE rn <= 3;
+
+
+## Common Full Query Structure
+
+SELECT
+FROM
+JOIN ... ON
+WHERE
+GROUP BY
+HAVING
+ORDER BY
+LIMIT
+OFFSET
