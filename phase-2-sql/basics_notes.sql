@@ -154,6 +154,7 @@ SELECT dept, AVG(iq) AS avg_iq
 FROM a
 GROUP BY dept;
 
+-- SUM(), MIN(), MAX(),:used with as and group by  frequently.
 
 -- -------------------------------------------------
 -- 12. HAVING
