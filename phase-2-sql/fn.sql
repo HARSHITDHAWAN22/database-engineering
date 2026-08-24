@@ -99,22 +99,53 @@ from proucts e;
 
 
 -- ---------------------------------------------------------------------------------------------------------------------------
--- 5.Last_value()
--- Fetch the value of first product in each partition(Also need to define frame clause)( unbounded preceding and current row- this is default  no need to write this).
--- Without proper frame clause, it may return the current row value instead of the true last value.
--- Frame Clause: Defines the range of rows considered for a window function calculation.
--- ROWS behavior:
--- ROWS treats duplicate ORDER BY values as separate rows.
--- RANGE behavior:
--- RANGE groups all rows having the same ORDER BY value together.
+-- 5. LAST_VALUE()
+-- Fetch the last product of each category.
+--
+-- Frame Clause:
+-- Defines the range of rows considered for a window function calculation.
+--
+-- ROWS:
+-- Treats duplicate ORDER BY values as separate rows.
+--
+-- RANGE:
+-- Groups rows having the same ORDER BY value together.
+--
+-- For LAST_VALUE(), use:
+-- UNBOUNDED PRECEDING → start from the first row of the partition
+-- UNBOUNDED FOLLOWING → go until the last row of the partition
+--
+-- This is important because the default frame may end at the CURRENT ROW,
+-- causing LAST_VALUE() to return the current row instead of the true last row.
 -- ---------------------------------------------------------------------------------------------------------------------------
 
---Example - fetch last product of each category
-Select e.*,
-last_value(product_name) over(partition by product_category order by desc range between ROWS unbounded preceding and current row following ) as fp
-from product e;
+-- Example: Fetch the last product of each category
+
+SELECT e.*,
+       LAST_VALUE(product_name) OVER (
+           PARTITION BY product_category
+           ORDER BY product_name
+           ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+       ) AS last_product
+FROM product e;
 
 
+
+-- Multiple columns in PARTITION BY
+
+SELECT *
+FROM (
+    SELECT e.*,
+           ROW_NUMBER() OVER (
+               PARTITION BY dept_name, job_title
+               ORDER BY salary DESC
+           ) AS rn
+    FROM employee e
+) x
+WHERE rn = 1;
+
+-- Gets highest-paid employee for each
+-- dept_name + job_title combination.
 
 
 
